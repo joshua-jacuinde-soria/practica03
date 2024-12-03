@@ -1,7 +1,7 @@
 #Este archivo contendra los modelos que mapean las tablas de la base de datos
 
 from ORM.config import BaseClass
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from datetime import datetime
 
 #creamos las clases que representan las tablas de la base de datos

@@ -1,6 +1,5 @@
 #Este archivo contrendra las consultas a la base de datos
 from ORM.modelos import Alumno, Calificacion, Foto
-from ORM.config import SessionClass
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 
@@ -75,9 +74,10 @@ def borrar_fotos_id(sesion:Session, id:int):
     return True
 
 def borrar_calificacion_id(sesion:Session, id:int):
-    # borramos la calificacion con el id proporcionado
-    calificacion = obtener_calificacion_id(sesion, id)
-    if calificacion is not None:
-        sesion.delete(calificacion)
+    # borramos todas las calificaciones de un alumno
+    calificaciones = obtener_calificacion_id(sesion, id)
+    if calificaciones is not None:
+        for calificacion in calificaciones:
+            sesion.delete(calificacion)
         sesion.commit()
     return True
