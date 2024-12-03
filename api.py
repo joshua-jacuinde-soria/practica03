@@ -52,3 +52,17 @@ def borrar_foto_id(id: int, sesion: Session = Depends(generador_session)):
     return repo.borrar_fotos_id(sesion, id)
 
 @app.delete("/calificacion/{id}")
+def borrar_calificacion_id(id: int, sesion: Session = Depends(generador_session)):
+    return repo.borrar_calificacion_id(sesion, id)
+
+@app.delete("/alumno/{id}/calificaciones")
+def borrar_calificaciones_id_alumno(id: int, sesion: Session = Depends(generador_session)):
+    return repo.borrar_calificacion_id_alumno(sesion, id)
+
+@app.delete("/alumno/{id}/fotos")
+def borrar_fotos_id_alumno(id: int, sesion: Session = Depends(generador_session)):
+    return repo.borrar_foto_id_alumno(sesion, id)
+
+@app.delete("/alumno/{id}")
+def borrar_alumno_id(id: int, sesion: Session = Depends(generador_session)):
+    return repo.borrar_alumno_id(sesion, id)
