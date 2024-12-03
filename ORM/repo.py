@@ -64,3 +64,20 @@ def borrar_alumno_id(sesion:Session, id:int):
         sesion.delete(alumno)
         sesion.commit()
     return True
+
+def borrar_fotos_id(sesion:Session, id:int):
+    # borramos todas las fotos de un alumno
+    fotos = obtener_foto_id(sesion, id)
+    if fotos is not None:
+        for foto in fotos:
+            sesion.delete(foto)
+        sesion.commit()
+    return True
+
+def borrar_calificacion_id(sesion:Session, id:int):
+    # borramos la calificacion con el id proporcionado
+    calificacion = obtener_calificacion_id(sesion, id)
+    if calificacion is not None:
+        sesion.delete(calificacion)
+        sesion.commit()
+    return True
