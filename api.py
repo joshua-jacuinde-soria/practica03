@@ -4,6 +4,7 @@ from fastapi import FastAPI, Depends
 from ORM import repo
 from ORM.config import generador_session
 from sqlalchemy.orm import Session
+import ORM.esquemas as esquemas
 
 # creación del servidor
 app = FastAPI()
@@ -75,3 +76,27 @@ def borrar_fotos_id_alumno(id: int, sesion: Session = Depends(generador_session)
 def borrar_alumno_id(id: int, sesion: Session = Depends(generador_session)):
     repo.borrar_alumno_id(sesion, id)
     return {"mensaje": "Alumno borrado"}
+
+@app.post("/alumno")
+def insertar_alumno(alumno: esquemas.AlumnoBase, sesion: Session = Depends(generador_session)):
+    return repo.insertar_alumno(sesion, alumno)
+
+@app.put("/alumno/{id}")
+def actualizar_alumno(id: int, alumno: esquemas.AlumnoBase, sesion: Session = Depends(generador_session)):
+    return repo.actualizar_alumno(sesion, id, alumno)
+
+@app.post("/alumno/{id}/calificacion")
+def insertar_calificacion(calificacion: esquemas.CalificacionBase, sesion: Session = Depends(generador_session)):
+    return repo.insertar_calificacion(sesion, calificacion)
+
+app.put("/calificacion/{id}")
+def actualizar_calificacion(id: int, calificacion: esquemas.CalificacionBase, sesion: Session = Depends(generador_session)):
+    return repo.actualizar_calificacion(sesion, id, calificacion)
+
+@app.post("/alumno/{id}/foto")
+def insertar_foto(foto: esquemas.FotoBase, sesion: Session = Depends(generador_session)):
+    return repo.insertar_foto(sesion, foto)
+
+@app.put("/foto/{id}")
+def actualizar_foto(id: int, foto: esquemas.FotoBase, sesion: Session = Depends(generador_session)):
+    return repo.actualizar_foto(sesion, id, foto)
